@@ -1,12 +1,14 @@
-import userStore from './store/users-store'
+import usersStore from './store/users-store'
+import { renderTable } from './presentation/render-table/render-table';
 /**
  * 
- * @param {HTMLDivElement} elemento
+ * @param {HTMLDivElement} element
  */
 export const UserApp = async( element ) => {
     element.innerHTML = 'Loading...';
-    await userStore.loadNextPage(); 
+    await usersStore.loadNextPage();
+    element.innerHTML = ''; 
     
-    console.log( userStore.getUsers() );
+    renderTable( element );
     
 }

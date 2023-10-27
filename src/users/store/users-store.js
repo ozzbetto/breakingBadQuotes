@@ -12,6 +12,7 @@ const loadNextPage = async() => {
 
     state.currentPage += 1;
     state.users = users;
+    
 }
 
 const loadPreviuosPage = async() => {
