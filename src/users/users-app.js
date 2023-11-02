@@ -1,5 +1,6 @@
 import usersStore from './store/users-store'
 import { renderTable } from './presentation/render-table/render-table';
+import { renderButtons } from './presentation/render-buttons/render-buttons';
 /**
  * 
  * @param {HTMLDivElement} element
@@ -10,5 +11,6 @@ export const UserApp = async( element ) => {
     element.innerHTML = ''; 
     
     renderTable( element );
+    renderButtons( element );
     
 }
