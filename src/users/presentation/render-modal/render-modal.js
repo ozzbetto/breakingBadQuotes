@@ -10,7 +10,7 @@ export const showModal = () => {
 
 export const hideModal = () => {
     modal?.classList.add('hide-modal');
-    // TODO: Form reset
+    form?.reset();
 }
 
 
@@ -35,7 +35,28 @@ export const renderModal = ( element ) => {
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-        console.log('Data sent to server');
+        
+        const formData = new FormData( form );
+        const userLike = {};
+
+        for (const [key, value] of formData) {
+            if( key === 'balance' ) {
+                userLike[key] = +value;
+                continue;
+            }
+
+            if( key === 'isActive' ) {
+                userLike[key] = (value === 'on' ) ? true : false;
+                continue;
+            }
+
+            userLike[key] = value;
+        }
+
+        // console.log( userLike );
+        // TODO: Guardar usuario
+        hideModal();
+
     });
 
     element.append( modal );
