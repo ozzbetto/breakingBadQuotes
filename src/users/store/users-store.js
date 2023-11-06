@@ -16,7 +16,22 @@ const loadNextPage = async() => {
 }
 
 const loadPreviuosPage = async() => {
-    throw new Error('Not yet implemented');
+
+    // Verifico is ya estoy en la primera página
+    if( state.currentPage === 1 ) {
+        throw new Error('Ya no hay páginas previas');
+    }
+
+    //Intento cargar la página anterior
+    const users = await loadUsersByPage(state.currentPage - 1);
+
+    //Si no hay usuarios entonces no hacer nada
+    if( users.length === 1 ) return;
+
+    //Actualizo el estado de la página anterior
+    state.currentPage -= 1;
+    state.users = users;
+
 }
 
 
