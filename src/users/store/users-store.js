@@ -1,3 +1,4 @@
+import { User } from "../models/user";
 import { loadUsersByPage } from "../use-cases/load-users-by-page";
 
 
@@ -35,12 +36,34 @@ const loadPreviuosPage = async() => {
 }
 
 
-const onUserChanged = () => {
-    throw new Error('Not yet implemented');
+/**
+ * 
+ * @param {User} updatedUser 
+ */
+const onUserChanged = ( updatedUser ) => {
+    let wasFound = false;
+    state.users = state.users.map( user => {
+        if( user.id === updatedUser.id) {
+            wasFound = true;
+            return updatedUser;
+        }
+        return user;
+    });
+
+    if( state.users.length < 10 && !wasFound ) {
+        state.users.push( updatedUser );
+    }
 }
 
+
 const reloadPage = async() => {
-    throw new Error('Not yet implemented');
+    const users = await loadUsersByPage( state.currentPage);
+    if ( users.length === 0 ) {
+        await loadPreviuosPage();
+        return;
+    }
+
+    state.users = users;
 }
 
 
