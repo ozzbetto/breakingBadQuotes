@@ -44,7 +44,7 @@ const tableDeleteListener = async ( event ) => {
     try {
         await deleteUserById(id);
         await usersStore.reloadPage();
-        document.querySelector('current-page').innerText = usersStore.getCurrentPage();
+        document.querySelector('#current-page').innerText = usersStore.getCurrentPage();
         renderTable();
 
     } catch (error) {
@@ -81,7 +81,7 @@ export const renderTable = ( element ) => {
                 <td>
                     <a href=#/ class="select-user" data-id="${user.id}">Select</a>
                     |
-                    <a href=#/ class="delete-user data-id="${user.id}">Delete</a>
+                    <a href=#/ class="delete-user" data-id="${user.id}">Delete</a>
                 </td>
             </tr>
         
